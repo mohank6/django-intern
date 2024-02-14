@@ -44,5 +44,8 @@ def generate_fake_data():
         genre = fake.random_element(genres)
         post = create_fake_post(author, genre)
 
+        comments = []
         for _ in range(5):
-            create_fake_comment(post)
+            comments.append(create_fake_comment(post))
+        post.comments.set(comments)
+        post.save()
