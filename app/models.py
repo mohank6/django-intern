@@ -17,7 +17,7 @@ class Post(models.Model):
 class Author(models.Model):
     name = models.CharField(max_length=255)
     author_details = models.OneToOneField(
-        'AuthorDetails', on_delete=models.CASCADE, related_name='author_info'
+        'AuthorDetails', on_delete=models.CASCADE, related_name='author_info', null=True
     )
 
     def __str__(self):
