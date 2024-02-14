@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+    <h1>Title: {{post.title}}</h1>
+    <p>Author: {{post.author}}</p>
+    <p>Read: {{post.read_time}} minutes</p>
+</div>
+<div>
+    <h2>Comments</h2>
+    {% for comment in comments %}
+    <p>Id: {{comment.id}}</p>
+    <p>{{comment.content}}</p>
+    {% endfor %}
+</div>
+{% endblock content %}
