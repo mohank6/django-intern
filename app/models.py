@@ -6,7 +6,7 @@ class Post(models.Model):
     author = models.ForeignKey('Author', on_delete=models.CASCADE)
     genre = models.ForeignKey('Genre', on_delete=models.SET_NULL, null=True)
     read_time = models.PositiveIntegerField()
-    comments = models.ManyToManyField('Comment', blank=True, related_name='comments')
+    # comments = models.ManyToManyField('Comment', blank=True, related_name='comments')
     tag = models.CharField(max_length=255, null=True)
     created_at = models.DateTimeField(auto_now=True)
 
@@ -16,9 +16,9 @@ class Post(models.Model):
 
 class Author(models.Model):
     name = models.CharField(max_length=255)
-    author_details = models.OneToOneField(
-        'AuthorDetails', on_delete=models.CASCADE, related_name='author_info', null=True
-    )
+    # author_details = models.OneToOneField(
+    #     'AuthorDetails', on_delete=models.CASCADE, related_name='author_info', null=True
+    # )
 
     def __str__(self):
         return self.name
@@ -31,6 +31,8 @@ class AuthorDetails(models.Model):
     age = models.PositiveIntegerField()
     address = models.TextField()
     genre = models.ManyToManyField('Genre', blank=True)
+    def __str__(self):
+        return f"Details of {self.author}"
 
 
 class Genre(models.Model):
@@ -41,7 +43,7 @@ class Genre(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='post')
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name="comments")
     content = models.TextField()
 
     def __str__(self):
